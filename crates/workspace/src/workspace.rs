@@ -8477,6 +8477,7 @@ impl Render for Workspace {
                 this.child(
                     gpui::img(image_source)
                         .absolute()
+                        .object_fit(gpui::ObjectFit::Cover)
                         .size_full()
                 )
             })
