@@ -164,6 +164,11 @@ pub struct ThemeSettingsContent {
     /// The name of the icon theme to use.
     pub icon_theme: Option<IconThemeSelection>,
 
+    /// Path to a background image that covers the full editor.
+    pub background_image: Option<String>,
+    /// Opacity of the background image (or of the UI covering the background image).
+    pub background_image_opacity: Option<f32>,
+
     /// UNSTABLE: Expect many elements to be broken.
     ///
     // Controls the density of the UI.

@@ -983,6 +983,8 @@ impl VsCodeSettings {
             markdown_preview_theme: None,
             theme: None,
             icon_theme: None,
+            background_image: None,
+            background_image_opacity: None,
             ui_density: None,
             unnecessary_code_fade: None,
             experimental_theme_overrides: None,

@@ -8455,6 +8455,8 @@ impl Render for Workspace {
             workspace: &self.weak_self,
         };
 
+        let background_image = ThemeSettings::get_global(cx).background_image.clone();
+
         div()
             .relative()
             .size_full()
@@ -8466,6 +8468,18 @@ impl Render for Workspace {
             .items_start()
             .text_color(colors.text)
             .overflow_hidden()
+            .when_some(background_image, |this, background_image| {
+                let image_source = if background_image.starts_with("http://") || background_image.starts_with("https://") {
+                    gpui::ImageSource::from(gpui::SharedUri::from(background_image))
+                } else {
+                    gpui::ImageSource::from(std::path::PathBuf::from(background_image))
+                };
+                this.child(
+                    gpui::img(image_source)
+                        .absolute()
+                        .size_full()
+                )
+            })
             .children(self.titlebar_item.clone())
             .on_modifiers_changed(move |_, _, cx| {
                 for &id in &notification_entities {

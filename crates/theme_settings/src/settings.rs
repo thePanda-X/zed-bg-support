@@ -87,6 +87,10 @@ pub struct ThemeSettings {
     pub ui_density: UiDensity,
     /// The amount of fading applied to unnecessary code.
     pub unnecessary_code_fade: f32,
+    /// Path to a background image that covers the full editor.
+    pub background_image: Option<String>,
+    /// Opacity of the background image (or of the UI covering the background image).
+    pub background_image_opacity: Option<f32>,
 }
 
 /// Returns the name of the default theme for the given [`Appearance`].
@@ -711,6 +715,8 @@ impl settings::Settings for ThemeSettings {
             icon_theme: icon_theme_selection,
             ui_density: ui_density_from_settings(content.ui_density.unwrap_or_default()),
             unnecessary_code_fade: content.unnecessary_code_fade.unwrap().0.clamp(0.0, 0.9),
+            background_image: content.background_image.clone(),
+            background_image_opacity: content.background_image_opacity,
         }
     }
 }

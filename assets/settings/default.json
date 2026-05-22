@@ -12,6 +12,10 @@
     "dark": "One Dark",
   },
   "icon_theme": "Zed (Default)",
+  // Path to a background image that covers the full editor.
+  "background_image": null,
+  // Opacity of the background image (or of the UI covering the background image).
+  "background_image_opacity": 1.0,
   // The name of a base set of key bindings to use.
   // This setting can take six values, each named after another
   // text editor:

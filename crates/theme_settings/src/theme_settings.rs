@@ -170,7 +170,31 @@ fn configured_theme(cx: &mut App) -> Arc<Theme> {
                 .unwrap_or_else(|_| themes.get(DEFAULT_DARK_THEME).unwrap())
         }
     };
-    theme_settings.apply_theme_overrides(theme)
+    let theme = theme_settings.apply_theme_overrides(theme);
+
+    if theme_settings.background_image.is_some() {
+        let opacity = theme_settings.background_image_opacity.unwrap_or(1.0);
+        let mut modified_theme = (*theme).clone();
+
+        let colors = &mut modified_theme.styles.colors;
+        colors.background.a = opacity;
+        colors.editor_background.a = opacity;
+        colors.surface_background.a = opacity;
+        colors.panel_background.a = opacity;
+        colors.terminal_background.a = opacity;
+        colors.status_bar_background.a = opacity;
+        colors.title_bar_background.a = opacity;
+        colors.title_bar_inactive_background.a = opacity;
+        colors.toolbar_background.a = opacity;
+        colors.tab_bar_background.a = opacity;
+        colors.tab_inactive_background.a = opacity;
+        colors.tab_active_background.a = opacity;
+        colors.editor_gutter_background.a = opacity;
+
+        Arc::new(modified_theme)
+    } else {
+        theme
+    }
 }
 
 fn configured_icon_theme(cx: &mut App) -> Arc<theme::IconTheme> {
